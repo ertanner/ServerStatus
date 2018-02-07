@@ -1,0 +1,44 @@
+[
+    {
+      "id": "0",
+      "env": "prod",
+      "ComputerName": "DLNTMD2L00",
+      "Service": "IIS",
+      "Description": "D2Link Web"
+    },
+    {
+      "id": "1",
+      "env": "prod",
+      "ComputerName": "DLNWS02",
+      "Service": "Apache2.2.31_ApacheXML",
+      "Description": "Apache2.2.31_ApacheXML"
+    },
+    {
+      "id": "2",
+      "env": "prod",
+      "ComputerName": "DLNWS02",
+      "Service": "TMW TruckMate API Service",
+      "Description": "TMW TruckMate API Service"
+    },
+    {
+      "id": "3",
+      "env": "prod",
+      "ComputerName": "dlptmcom00",
+      "Service": "MileServ1",
+      "Description": "Mileage Server Instance1"
+    },
+    {
+      "id": "4",
+      "env": "prod",
+      "ComputerName": "dlptmcom00",
+      "Service": "MadHostSvc7",
+      "Description": "TMW Service (Scale Import)7 - Daylight Transport, LLC."
+    },
+    {
+      "id": "5",
+      "env": "prod",
+      "ComputerName": "DLPSYNPRC01",
+      "Service": "SynergizeProcessServer",
+      "Description": "SynergizeProcessServer"
+    }
+]

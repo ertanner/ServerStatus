@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Server Status</title>
+    <script type="text/javascript">
+        function myWebsocketStart()
+        {
+            var ws = new WebSocket("ws://localhost:8080/ws");
+
+            ws.onopen = function()
+            {
+                // Web Socket is connected, send data using send()
+                ws.send("ping");
+                var myTextArea = document.getElementById("textarea1");
+                myTextArea.value = myTextArea.value + "\n" + "First message sent";
+            };
+
+            ws.onmessage = function (evt)
+            {
+                var myTextArea = document.getElementById("textarea1");
+                myTextArea.value = myTextArea.value + "\n" + evt.data
+                if(evt.data == "pong") {
+                    setTimeout(function(){ws.send("ping");}, 2000);
+                }
+            };
+
+            ws.onclose = function()
+            {
+                var myTextArea = document.getElementById("textarea1");
+                myTextArea.value = myTextArea.value + "\n" + "Connection closed";
+            };
+
+        }
+
+    </script>
+</head>
+
+<body>
+<script src="/js/ServerStatus.js"></script>
+<link href="/css/ServerStatus2.css" rel="stylesheet" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+
+
+{{ $urlName := .URLName}}
+    <h2 align="center" >Server Status</h2>
+{{template "header" .}}
+
+    <table valign="top">
+        <tr><td bgcolor="#7fffd4">Service Up</td> <td bgcolor="#fa8072">Service Down</td><td bgcolor="#f0ffff">Server Connection Down</td></tr>
+    </table>
+    <table border="4" width="page" {{if eq $urlName "prod"}}bordercolor="RED" {{end}}  >
+        <tr align="left" class="noborders" {{if eq $urlName "prod"}}bgcolor="red"{{end}}>
+            <td align="left">{{if eq $urlName "prod"}}<p style="color: white">{{end}} <b> Environment: {{$urlName}}</b></p></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td ></td>
+            <td  align="right"><a href="/refreshPage/?env={{$urlName}}"  {{if eq $urlName "prod"}}style="color: white" {{end}}>Refresh {{$urlName}} List</a></p></td>
+        </tr>
+    <form action="/updateStatus" method="post">
+        <tr class="noborders">
+            <td class="border"  align="center">
+                <p>ID</p>
+            </td>
+            <td class="border"  align="center">
+                <p>Environment</p>
+            </td>
+            <td class="border"  align="center">
+                <p>Computer Name</p>
+            </td >
+            <td class="border"  align="center">
+                <p>Service Name</p>
+            </td >
+            <td class="border"  align="center">
+                <p>Description</p>
+            </td>
+            <td class="border"  align="center"> <p>Change Status</p></td>
+        </tr>
+        {{range .Services}}
+        {{if eq .Env $urlName }}
+        <tr {{if eq .Status "up"}} bgcolor="#7fffd4" {{else if eq .Status "dn"}} bgcolor="#fa8072" {{else}} bgcolor="#f0ffff" onclick="cantGetService" {{end}} >
+            <td align="center">{{.ID}}</td>
+            <td align="center">{{.Env}}</td>
+            <td align="left">{{.ComputerName}}</td>
+        <td align="left"> <a href="/refreshStatus/?id={{.ID}}">{{.Service}}</a></td>
+            <td align="left">{{.Description}}</td>
+        <td valign="center">
+                <input align="left" type="checkbox" id="check"  value="{{.ID}}" name="check"  >
+                <a href="/refreshStatus/?id={{.ID}}"><img align="right" src="html/refresh.gif"></a>
+             </td>
+        </tr>{{end}}{{end}}
+        <tr class="noborders">
+            <td ></td>
+            <td ></td>
+            <td ></td>
+            <td ></td>
+            <td ></td>
+            <td><input type="submit" value="Submit Changes"></td>
+        </tr>
+    </table>
+    </form>
+
+
+<!--<p>-->
+    <!--<button onclick="javascript:myWebsocketStart()">Start websocket!</button>-->
+    <!--<textarea id="textarea1">MyTextArea</textarea>-->
+<!--</p>-->
+
+
+</body>
+</html>

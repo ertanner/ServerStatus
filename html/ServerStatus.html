@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Server Status</title>
+</head>
+
+<body>
+<link href="/css/ServerStatus.css" rel="stylesheet" />
+<script src="/js/ServerStatus.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <div>
+        <h2 align="center" >Server Status</h2>
+    </div>
+    <div class="container">
+
+        <header>
+
+            <h3><p>Environments</p></h3>
+            <ul class="tab">
+                {{range .}}
+                <li><a href="/{{.}}" >{{.}}</a></li>
+                {{end}}
+                <li style="float: right"><a href="/"> Logout</a></li>
+            </ul>
+        </header>
+    </div>
+</body>
+</html>

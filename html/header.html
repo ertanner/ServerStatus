@@ -1,0 +1,15 @@
+{{define "header"}}
+<div class="container">
+    <link href="/css/ServerStatus.css" rel="stylesheet" />
+    <header>
+        <h3><p>Environments</p></h3>
+        <ul class="tab">
+            {{range .Environment}}
+            <li><a href="/{{.}}" >{{.}}</a></li>
+            {{end}}
+            <li style="float: right"><a href="/"> Logout </a></li>
+            <li style="float: right"><a href="/home"> Home </a></li>
+        </ul>
+    </header>
+</div>
+{{end}}

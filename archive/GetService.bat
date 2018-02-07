@@ -1,0 +1,1 @@
+$S1 = Get-Service -ComputerName %1 | Where-Object {$_.name -eq %2}| Select-Object Status, Name, DisplayName

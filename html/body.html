@@ -1,0 +1,41 @@
+{{template "header" .}}
+<nav>
+    <!--//<form name="submit" action="/submit" >-->
+
+    <div id="Prod" class="tabcontent">
+        <h3>Production Services</h3>
+        <table border="2" width="page" >
+            <tr>
+                <td align="center">
+                    <p>Envioronment</p>
+                </td>
+                <td align="center">
+                    <p>Computer Name</p>
+                </td >
+                <td align="center">
+                    <p>Service Name</p>
+                </td >
+                <td align="center">
+                    <p>Priority</p>
+                </td>
+            </tr>
+            {{range .Services}}
+            <tr>
+                <td align="center">{{.ID}}</td>
+                <td align="center">{{.Env}}</td>
+                <td align="center">{{.ComputerName}}</td>
+                <td align="center">{{.ServiceName}}</td>
+                <td align="center">{{.Priority}}</td>
+                <td align="center">{{.Predecessor}}</td>
+            </tr>
+            {{end}}
+        </table>
+    </div>
+
+    <!--//<button type="submit">Go!</button>-->
+    <!--//</form>-->
+</nav>
+</div>
+
+</body>
+{{template "footer" .}}
